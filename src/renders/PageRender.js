@@ -12,7 +12,7 @@ function calculateCanvasDimensions(windowWidth, arraySize) {
 
     const calculatedHeight = window.innerHeight - navbarSize;
 
-    const width = (windowWidth < minimumWidth) ? minimumWidth : windowWidth;
+    const width = Math.floor((windowWidth < minimumWidth) ? minimumWidth : windowWidth);
     const height = (calculatedHeight < minimumHeight) ? minimumHeight : calculatedHeight;
     return { 
         width,
@@ -25,7 +25,7 @@ function calculateBarWidth(windowWidth, arraySize) {
     return Math.floor(avaiableWidth/arraySize);
 }
 
-function calculateLeftOffset(windowWidth, arraySize) {
+function calculateLeftOffset(windowWidth, arraySize, barWidth) {
     return Math.floor((windowWidth - (arraySize * barWidth) - (arraySize * MINIMUM_BAR_MARGIN)) / 2);
 }
 
@@ -41,19 +41,5 @@ function setBarWidth(barWidth) {
 }
 
 
-function generatePage() {
-    const windowWidth = window.innerWidth * CANVAS_WINDOW_WIDTH;
-    const arraySize = parseInt(document.getElementById("arraySize").value);
 
-    const { width, height } = calculateCanvasDimensions(windowWidth, arraySize);
-    //console.log("CW: ", width, " CH: ", height);
-    setCanvasDimension(width, height);
-
-    barWidth = calculateBarWidth(windowWidth, arraySize);
-    setBarWidth(barWidth);
-    //console.log("barWidth:", barWidth);
-
-    offset = calculateLeftOffset(windowWidth, arraySize);
-    //console.log("O:", offset)
-}
 
