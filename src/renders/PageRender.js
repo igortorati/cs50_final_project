@@ -36,10 +36,21 @@ function setCanvasDimension(width, height) {
 }
 
 function setBarWidth(barWidth) {
-    const root = document.querySelector(':root');
-    root.style.setProperty("--barWidth", (barWidth < MINIMUM_BAR_SIZE)? MINIMUM_BAR_SIZE : barWidth);
+    document.documentElement.style.setProperty("--barWidth", (barWidth < MINIMUM_BAR_SIZE)? MINIMUM_BAR_SIZE : barWidth);
 }
 
+function generatePage() {
+    const windowWidth = window.innerWidth * CANVAS_WINDOW_WIDTH;
+    const arraySize = parseInt(document.getElementById("arraySize").value);
 
+    const { width, height } = calculateCanvasDimensions(windowWidth, arraySize);
+    //console.log("CW: ", width, " CH: ", height);
+    setCanvasDimension(width, height);
 
+    barWidth = calculateBarWidth(windowWidth, arraySize);
+    setBarWidth(barWidth);
+    //console.log("barWidth:", barWidth);
 
+    offset = calculateLeftOffset(windowWidth, arraySize, barWidth);
+    //console.log("O:", offset)
+}

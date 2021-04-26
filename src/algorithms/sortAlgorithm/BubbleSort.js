@@ -1,5 +1,3 @@
-import { Observable } from "../utils/Observable";
-
 class BubbleSort extends Observable{
     constructor(array) {
         this.array = array;
