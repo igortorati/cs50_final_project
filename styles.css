@@ -1,0 +1,11 @@
+#bar-container {
+    width: 499px;
+    margin: auto;
+}
+
+#bar {
+    width: 2px;
+    background-color: black;
+    margin: 0 1px;
+    display: inline-block;
+}
