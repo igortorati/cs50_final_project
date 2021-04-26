@@ -1,11 +1,17 @@
-#bar-container {
-    width: 499px;
-    margin: auto;
+:root {
+    --barWidth: 2px;
+    --barMargin: 1px;
 }
 
-#bar {
-    width: 2px;
+.bar {
+    width: var(--barWidth);
     background-color: black;
-    margin: 0 1px;
+    margin: 0 var(--barMargin);
     display: inline-block;
+}
+
+#sortingCanvas {
+    display: block;
+    margin: 0 auto;
+    border:5px solid #000000;
 }

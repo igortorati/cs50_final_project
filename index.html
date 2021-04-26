@@ -8,14 +8,50 @@
         <link rel="stylesheet" href="styles.css">
         <script src="pageController.js"></script>
     </head>
-    <body>
-    </body>
-    <footer>
-        <nav class="navbar navbar-expand-md navbar-light bg-light border">
-            <a class="navbar-brand" href="/"><span class="blue">Sorting Visualizer</span></a>
-            <div class="collapse navbar-collapse" id="navbar">
-            </div>
-        </nav>
+    <body onload="generatePage()" onresize="generatePage()">
+        <div>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light border">
+                <a class="navbar-brand" href="/cs50_final_project/"><span class="blue">Sorting Visualizer</span></a>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-2 mt-2 ml-2">
+                        <li class="nav-item">
+                            <div class="mr-2 mt-2 ml-2">
+                                <label for="sortingAlgorithm">Sorting Algorithm: </label>
+                                <select name="sortingAlgorithm" id="sortingAlgorithm">
+                                    <option value="">-------</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="mr-2 mt-2 ml-2">
+                                <label for="generatingAlgorithm">Value Generation: </label>
+                                <select name="generatingAlgorithm" id="generatingAlgorithm">
+                                    <option value="">-------</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="mr-2 mt-2 ml-2">
+                                <label for="arraySize" class="form-label">Array Size: </label>
+                                <input type="range" class="form-range" min=4 max=250 value=100 id="arraySize" onchange="generatePage()">
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="mr-2 ml-2">
+                                <button class="btn btn-primary" onclick="startSorting()">Sort</button>
+                                <button class="btn btn-primary" onclick="abortSorting()">Abort</button>
+                            </div>
+                        </li>
+                    </ul>                
+                </div>
+            </nav>
         </div>
-    </footer>
+        <div>
+            <canvas id="sortingCanvas"></canvas>
+        </div>
+        
+    </body>
 </html>
