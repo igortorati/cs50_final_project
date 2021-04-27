@@ -1,30 +1,38 @@
 var RUNNING = false;
 var ARRAY = [];
 var ORDERED = []
-var SLEEP_TIME = 5;
-const SWAP_SLEEP_MODFIER = 2;
+var SLEEP_TIME = 200;
+const SWAP_SLEEP_MODFIER = 1;
 const CANVAS_RENDER = new CanvasRender();
+const DEFAULT_BAR_COLOR = "#4d4d4d";
+const DEFAULT_CORRECT_COLOR = "green";
+const DEFAULT_COMPARE_COLOR = "#a3a3a3";
+const DEFAULT_SWAP_COLOR = "red";
+
 const validGenerations = {
-    RandomGeneration() {
+    Random_Generation() {
         return new RandomGeneration().generate(arraySize);
     },
-    FullRangeGeneration() {
+    FullRange_Generation() {
         return new FullRangeGeneration().generate(arraySize);
     },
-    InvertedGeneration() {
+    Inverted_Generation() {
         return new InvertedGeneration().generate(arraySize);
     }
 }
 
 const validSorts = {
-    BubbleSort() {
+    Bubble_Sort() {
         return new BubbleSort();
     },
-    SelectionSort() {
+    Selection_Sort() {
         return new SelectionSort();
     },
-    InsertionSort() {
+    Insertion_Sort() {
         return new InsertionSort();
+    },
+    Merge_Sort() {
+        return new MergeSort();
     }
 }
 
@@ -92,7 +100,7 @@ function generateArray() {
 function generateOptions(field, list) {
     
     Object.keys(list).forEach(element => {
-        field.innerHTML += '<option value="' + element + '">' + element + '</option>';
+        field.innerHTML += '<option value="' + element + '">' + element.replace("_"," ") + '</option>';
     });
 }
 
@@ -119,7 +127,9 @@ function renderPage() {
 }
 
 async function changeArray() {
-    await abort();
+    if (RUNNING) {
+        await abort();
+    }
     generateArray();
     console.log(ARRAY);
     renderPage();

@@ -33,20 +33,20 @@ class CanvasRender {
         return this.barWidth;
     }
 
-    populateCanvas() {
+    async populateCanvas() {
         this.clear();
         //console.log("Populating");
         var i;
         var drawFrom = this.leftOffset;
         if (ARRAY){
             for (i = 0; i < ARRAY.length; i++) {
-                this.drawBar(drawFrom, ARRAY[i], "black");
+                this.drawBar(drawFrom, ARRAY[i], DEFAULT_BAR_COLOR);
                 drawFrom += this.barWidth + MINIMUM_BAR_SIZE;
             }
             for (i = 0; i < ORDERED.length; i++) {
                 var basePosition = MINIMUM_BAR_MARGIN * ORDERED[i] + this.leftOffset;
                 var drawFrom = ORDERED[i] * this.barWidth + basePosition;
-                this.drawBar(drawFrom, ARRAY[ORDERED[i]], "green");
+                this.drawBar(drawFrom, ARRAY[ORDERED[i]], DEFAULT_CORRECT_COLOR);
                 drawFrom += this.barWidth + MINIMUM_BAR_SIZE;
             }
         }        
@@ -60,7 +60,7 @@ class CanvasRender {
                     data.forEach(element => {
                         const basePosition = MINIMUM_BAR_MARGIN * element + CANVAS_RENDER.getOffset();
                         const drawFrom = element * CANVAS_RENDER.getBarWidth() + basePosition;
-                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], "#a3a3a3");
+                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], DEFAULT_COMPARE_COLOR);
                     });
                 },
                 swap(data) {
@@ -69,7 +69,7 @@ class CanvasRender {
                     data.forEach(element => {
                         const basePosition = MINIMUM_BAR_MARGIN * element + CANVAS_RENDER.getOffset();
                         const drawFrom = element * CANVAS_RENDER.getBarWidth() + basePosition;
-                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], "red");
+                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], DEFAULT_SWAP_COLOR);
                     });
                 },
                 rightPosition(data) {
@@ -77,7 +77,7 @@ class CanvasRender {
                     ORDERED.push(data[0]);
                     var basePosition = MINIMUM_BAR_MARGIN * data[0] + CANVAS_RENDER.getOffset();
                     var drawFrom = data[0] * CANVAS_RENDER.getBarWidth() + basePosition;
-                    CANVAS_RENDER.drawBar(drawFrom, ARRAY[data[0]], "green");
+                    CANVAS_RENDER.drawBar(drawFrom, ARRAY[data[0]], DEFAULT_CORRECT_COLOR);
                     drawFrom += CANVAS_RENDER.barWidth + MINIMUM_BAR_SIZE;
                 },
                 finishCompare(data) {
@@ -85,7 +85,7 @@ class CanvasRender {
                     data.forEach(element => {
                         const basePosition = MINIMUM_BAR_MARGIN * element + CANVAS_RENDER.getOffset();
                         const drawFrom = element * CANVAS_RENDER.getBarWidth() + basePosition;
-                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], "black");
+                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], DEFAULT_BAR_COLOR);
                     });
                 },
                 finishSwap(data) {
@@ -94,7 +94,7 @@ class CanvasRender {
                     data.forEach(element => {
                         const basePosition = MINIMUM_BAR_MARGIN * element + CANVAS_RENDER.getOffset();
                         const drawFrom = element * CANVAS_RENDER.getBarWidth() + basePosition;
-                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], "black");
+                        CANVAS_RENDER.drawBar(drawFrom, ARRAY[element], DEFAULT_BAR_COLOR);
                     });
                 }
 

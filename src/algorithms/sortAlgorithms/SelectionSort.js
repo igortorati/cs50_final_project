@@ -8,7 +8,7 @@ class SelectionSort{
         for (i = 0; i < arraySize - 1 && RUNNING; i++) {
             var minPosition = i;
             for (j = i + 1; j < arraySize && RUNNING; j++) {
-                if (await compareSmaller(j, minPosition) && RUNNING) {
+                if (RUNNING && await compareSmaller(j, minPosition)) {
                     minPosition = j;
                 }
             }
