@@ -1,31 +1,43 @@
-class BubbleSort extends Observable{
+class BubbleSort{
     constructor() {
-        super();
     }
     
-    sort(array) {
-        this.array = array;
+    async sort() {
         var i, j, temp;
         var finished;
-        const arraySize = this.array.length
+        const arraySize = ARRAY.length
         for (i = 0; i < arraySize - 1 && !finished && RUNNING; i++) {
             finished = true;
             for (j = 0; j < arraySize - i - 1 && RUNNING; j++) {
-                this.notifyAll("compare", [j, j+1]);
-                if (this.array[j] > this.array[j+1]) {
-                    this.notifyAll("swap", [j, j+1]);
+                CANVAS_RENDER.update("compare", [j, j+1]);
+                await sleep(SLEEP_TIME);
+                if (ARRAY[j] > ARRAY[j+1] && RUNNING) {
+                    CANVAS_RENDER.update("swap", [j, j+1]);
                     this.swap(j, j+1);
                     finished = false;
+                    await sleep(SLEEP_TIME);
+                    CANVAS_RENDER.update("finishSwap", [j, j+1]);
+                } else {
+                    CANVAS_RENDER.update("finishCompare", [j, j+1]);
                 }
+                
             }
-            this.notifyAll("rightPosition", [arraySize - i - 1]);
+            if(RUNNING) {
+                CANVAS_RENDER.update("rightPosition", [arraySize - i - 1]);
+            }
+        }
+        for (j = 0; j < arraySize - i && RUNNING; j++) {
+            CANVAS_RENDER.update("rightPosition", [j]);
         }
     }
 
     swap(p1, p2) {
-        var temp = this.array[p1];
-        this.array[p1] = this.array[p2];
-        this.array[p2] = temp;
+        var temp = ARRAY[p1];
+        ARRAY[p1] = ARRAY[p2];
+        ARRAY[p2] = temp;
     }
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

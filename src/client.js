@@ -1,4 +1,7 @@
 var RUNNING = false;
+var ARRAY = [];
+var ORDERED = []
+var SLEEP_TIME = 5;
 const CANVAS_RENDER = new CanvasRender();
 const validGenerations = {
     RandomGeneration() {
@@ -17,14 +20,14 @@ const validSorts = {
     }
 }
 
-function start() {
+async function start() {
     sortMethod = document.getElementById("sortingAlgorithm").value;
     toggleOptionsStart();
 
     RUNNING = true;
 
     // Sort by selected algorithm
-    sort(sortMethod, CANVAS_RENDER.getArray());
+    await sort(sortMethod);
 
     RUNNING = false;
 
@@ -43,21 +46,21 @@ function toggleOptionsFinish() {
     document.getElementById("arraySize").disabled = false;
 }
 
-function sort(sortMethod, array){
+async function sort(sortMethod){
     
 
     const choosenSort = validSorts[sortMethod]();
     if (choosenSort) {
-        choosenSort.subscribe(CANVAS_RENDER);
         console.log("Calling ", sortMethod);
-        choosenSort.sort(array);
-        choosenSort.unsubscribe(CANVAS_RENDER);
+        await choosenSort.sort();
+        console.log("Finished ", sortMethod);
     }
 }
 
 function abort() {
     RUNNING = false;
-
+    ORDERED = [];
+    CANVAS_RENDER.populateCanvas();
     toggleOptionsFinish();
 }
 
@@ -70,7 +73,8 @@ function generateArray() {
     const choosenGen = validGenerations[genMethod];
     if (choosenGen) {
         console.log("Generating Array with", genMethod);
-        CANVAS_RENDER.setArray(choosenGen());
+        ORDERED = [];
+        ARRAY = choosenGen();
     }
 }
 
