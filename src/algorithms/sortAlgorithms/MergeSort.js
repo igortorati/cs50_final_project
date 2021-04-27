@@ -44,7 +44,8 @@ class MergeSort {
 
     async sort() {
         await this.mergeSort(0, ARRAY.length - 1);
-        for (i = 0; i < ARRAY.length && RUNNING; i--) {
+        var i;
+        for (i = 0; i < ARRAY.length && RUNNING; i++) {
             CANVAS_RENDER.update("rightPosition", [i]);
             await sleep(SLEEP_TIME);
         }

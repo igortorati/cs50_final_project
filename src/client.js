@@ -131,11 +131,10 @@ async function changeArray() {
         await abort();
     }
     generateArray();
-    console.log(ARRAY);
     renderPage();
 }
 
-async function changeSpeed() {
+function changeSpeed() {
     const value = parseInt(document.getElementById("speed").value);
     if(document.getElementById("slowMode").checked) {
         SLEEP_TIME = 1000 - value * 2;

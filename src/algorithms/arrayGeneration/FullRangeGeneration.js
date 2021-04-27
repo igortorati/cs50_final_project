@@ -17,7 +17,6 @@ class FullRangeGeneration {
             array.push(values[j]);
             values.splice(j,1);
         }
-        console.log(array);
         return array;
     }
 }
