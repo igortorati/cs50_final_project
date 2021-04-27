@@ -57,7 +57,6 @@ function generatePage() {
         setCanvasDimension(width, height);
     
         HEIGHT_SCALE = calculateHeightScale(arraySize, height);
-        console.log("ArSize: ", arraySize, "HS: ", HEIGHT_SCALE)
     
     
         barWidth = calculateBarWidth(windowWidth, arraySize);

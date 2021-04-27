@@ -22,22 +22,20 @@
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="sortingAlgorithm">Sorting Algorithm: </label>
                                 <select name="sortingAlgorithm" id="sortingAlgorithm">
-                                    <option value="BubbleSort">-------</option>
                                 </select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="generatingAlgorithm">Value Generation: </label>
-                                <select name="generatingAlgorithm" id="generatingAlgorithm">
-                                    <option value="RandomGeneration">-------</option>
+                                <select name="generatingAlgorithm" id="generatingAlgorithm" onchange="changeArray()">
                                 </select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="arraySize" class="form-label">Array Size: </label>
-                                <input type="range" class="form-range" min=4 max=250 value=100 id="arraySize" onchange="changeArraySize()">
+                                <input type="range" class="form-range" min=4 max=250 value=100 id="arraySize" onchange="changeArray()">
                             </div>
                         </li>
                         <li class="nav-item">
@@ -58,6 +56,8 @@
         <script src="./src/algorithms/sortAlgorithms/BubbleSort.js"></script>
 
         <script src="./src/algorithms/arrayGeneration/RandomGeneration.js"></script>
+        <script src="./src/algorithms/arrayGeneration/FullRangeGeneration.js"></script>
+        <script src="./src/algorithms/arrayGeneration/InvertedGeneration.js"></script>
 
         <script src="./src/renders/CanvasRender.js"></script>
         <script src="./src/client.js"></script>

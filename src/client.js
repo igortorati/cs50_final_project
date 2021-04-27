@@ -1,6 +1,21 @@
 var RUNNING = false;
 const CANVAS_RENDER = new CanvasRender();
-const RANDOMGENERATION = new RandomGeneration();
+const validGenerations = {
+    RandomGeneration() {
+        return new RandomGeneration().generate(arraySize);
+    },
+    FullRangeGeneration() {
+        return new FullRangeGeneration().generate(arraySize);
+    },
+    InvertedGeneration() {
+        return new InvertedGeneration().generate(arraySize);
+    }
+}
+const validSorts = {
+    BubbleSort() {
+        return new BubbleSort();
+    }
+}
 
 function start() {
     sortMethod = document.getElementById("sortingAlgorithm").value;
@@ -29,11 +44,7 @@ function toggleOptionsFinish() {
 }
 
 function sort(sortMethod, array){
-    const validSorts = {
-        BubbleSort() {
-            return new BubbleSort();
-        }
-    }
+    
 
     const choosenSort = validSorts[sortMethod]();
     if (choosenSort) {
@@ -53,27 +64,35 @@ function abort() {
 function generateArray() {
     genMethod = document.getElementById("generatingAlgorithm").value;
 
-    const validGenerations = {
-        RandomGeneration() {
-            arraySize = parseInt(document.getElementById("arraySize").value);
-            return RANDOMGENERATION.generate(arraySize);
-        }
-    }
+    arraySize = parseInt(document.getElementById("arraySize").value);
+    
 
     const choosenGen = validGenerations[genMethod];
     if (choosenGen) {
-        console.log("Generating Array with ", genMethod);
+        console.log("Generating Array with", genMethod);
         CANVAS_RENDER.setArray(choosenGen());
     }
 }
 
-function onPageCreate() {
+function generateOptions(field, list) {
     
+    Object.keys(list).forEach(element => {
+        field.innerHTML += '<option value="' + element + '">' + element + '</option>';
+    });
+}
 
+function onPageCreate() {
     CANVAS_RENDER.setCanvas(document.getElementById("sortingCanvas"));
 
-    generateArray();
+    console.log(Object.keys(validGenerations));
+    console.log(Object.keys(validSorts));
+    const genSelect = document.getElementById("generatingAlgorithm");
+    generateOptions(genSelect, validGenerations);
 
+    const sortSelect = document.getElementById("sortingAlgorithm");
+    generateOptions(sortSelect, validSorts);
+
+    generateArray();
     renderPage();
 }
 
@@ -84,7 +103,7 @@ function renderPage() {
     CANVAS_RENDER.populateCanvas();
 }
 
-function changeArraySize() {
+function changeArray() {
     generateArray();
     renderPage();
 }
