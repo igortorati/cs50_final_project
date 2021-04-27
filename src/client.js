@@ -65,9 +65,12 @@ async function sort(sortMethod){
     }
 }
 
-function abort() {
+async function abort() {
     RUNNING = false;
+    await sleep(SLEEP_TIME);
+
     ORDERED = [];
+    
     CANVAS_RENDER.populateCanvas();
     toggleOptionsFinish();
 }
@@ -115,8 +118,9 @@ function renderPage() {
     CANVAS_RENDER.populateCanvas();
 }
 
-function changeArray() {
-    abort();
+async function changeArray() {
+    await abort();
     generateArray();
+    console.log(ARRAY);
     renderPage();
 }

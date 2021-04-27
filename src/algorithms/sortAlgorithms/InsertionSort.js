@@ -14,10 +14,14 @@ class InsertionSort{
                 await this.swap(j, j + 1)
                 j--;
             }
+            
             CANVAS_RENDER.update("swap", [i, j + 1]);
             await sleep(SLEEP_TIME * SWAP_SLEEP_MODFIER);
             CANVAS_RENDER.update("finishSwap", [i, j + 1]);
-            ARRAY[j + 1] = pivot;
+            if (RUNNING){
+                ARRAY[j + 1] = pivot;
+            }
+            
         }
     }
 
@@ -25,9 +29,11 @@ class InsertionSort{
         CANVAS_RENDER.update("swap", [p1, p2]);
         await sleep(SLEEP_TIME * SWAP_SLEEP_MODFIER);
         CANVAS_RENDER.update("finishSwap", [p1, p2]);
-        var temp = ARRAY[p1];
-        ARRAY[p1] = ARRAY[p2];
-        ARRAY[p2] = temp;
+        if (RUNNING){
+            var temp = ARRAY[p1];
+            ARRAY[p1] = ARRAY[p2];
+            ARRAY[p2] = temp;
+        }
     }
 }
 
