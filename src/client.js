@@ -2,6 +2,7 @@ var RUNNING = false;
 var ARRAY = [];
 var ORDERED = []
 var SLEEP_TIME = 5;
+const SWAP_SLEEP_MODFIER = 2;
 const CANVAS_RENDER = new CanvasRender();
 const validGenerations = {
     RandomGeneration() {
@@ -14,9 +15,16 @@ const validGenerations = {
         return new InvertedGeneration().generate(arraySize);
     }
 }
+
 const validSorts = {
     BubbleSort() {
         return new BubbleSort();
+    },
+    SelectionSort() {
+        return new SelectionSort();
+    },
+    InsertionSort() {
+        return new InsertionSort();
     }
 }
 

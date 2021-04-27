@@ -15,7 +15,7 @@ class BubbleSort{
                     CANVAS_RENDER.update("swap", [j, j+1]);
                     this.swap(j, j+1);
                     finished = false;
-                    await sleep(SLEEP_TIME);
+                    await sleep(SLEEP_TIME * SWAP_SLEEP_MODFIER);
                     CANVAS_RENDER.update("finishSwap", [j, j+1]);
                 } else {
                     CANVAS_RENDER.update("finishCompare", [j, j+1]);
@@ -36,8 +36,4 @@ class BubbleSort{
         ARRAY[p1] = ARRAY[p2];
         ARRAY[p2] = temp;
     }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

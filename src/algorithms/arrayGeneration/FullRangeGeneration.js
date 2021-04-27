@@ -11,8 +11,9 @@ class FullRangeGeneration {
         }
         var array = [];
         var j;
+        i--;
         while (i--) {
-            j = Math.floor(Math.random() * (i-1));
+            j = Math.floor(Math.random() * (i));
             array.push(values[j]);
             values.splice(j,1);
         }
