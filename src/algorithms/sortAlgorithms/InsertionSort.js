@@ -10,8 +10,8 @@ class InsertionSort{
             var pivot = ARRAY[i];
             var j = i - 1;
 
-            while (j >= 0 && ARRAY[j] > pivot && RUNNING) {
-                await this.swap(j, j + 1)
+            while (j >= 0 && await compareGreater(j, j + 1) && RUNNING) {
+                await swap(j, j + 1)
                 j--;
             }
             
@@ -23,16 +23,9 @@ class InsertionSort{
             }
             
         }
-    }
-
-    async swap(p1, p2) {
-        CANVAS_RENDER.update("swap", [p1, p2]);
-        await sleep(SLEEP_TIME * SWAP_SLEEP_MODFIER);
-        CANVAS_RENDER.update("finishSwap", [p1, p2]);
-        if (RUNNING){
-            var temp = ARRAY[p1];
-            ARRAY[p1] = ARRAY[p2];
-            ARRAY[p2] = temp;
+        for (i = arraySize - 1; i >= 0; i--) {
+            CANVAS_RENDER.update("rightPosition", [i]);
+            await sleep(SLEEP_TIME);
         }
     }
 }
