@@ -1,5 +1,9 @@
 class RandomGeneration {
-    static generate(arraySize) {
+    constructor() {
+        
+    }
+
+    generate(arraySize) {
         var array = [];
         var i;
         for (i = 0; i < arraySize; i++) {

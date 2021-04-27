@@ -1,4 +1,6 @@
 var RUNNING = false;
+const CANVAS_RENDER = new CanvasRender();
+const RANDOMGENERATION = new RandomGeneration();
 
 function start() {
     sortMethod = document.getElementById("sortingAlgorithm").value;
@@ -7,7 +9,7 @@ function start() {
     RUNNING = true;
 
     // Sort by selected algorithm
-    sort(sortMethod, CanvasRender.getArray());
+    sort(sortMethod, CANVAS_RENDER.getArray());
 
     RUNNING = false;
 
@@ -35,9 +37,10 @@ function sort(sortMethod, array){
 
     const choosenSort = validSorts[sortMethod]();
     if (choosenSort) {
-        choosenSort.subscribe(CanvasRender);
+        choosenSort.subscribe(CANVAS_RENDER);
         console.log("Calling ", sortMethod);
         choosenSort.sort(array);
+        choosenSort.unsubscribe(CANVAS_RENDER);
     }
 }
 
@@ -53,19 +56,21 @@ function generateArray() {
     const validGenerations = {
         RandomGeneration() {
             arraySize = parseInt(document.getElementById("arraySize").value);
-            return RandomGeneration.generate(arraySize);
+            return RANDOMGENERATION.generate(arraySize);
         }
     }
 
     const choosenGen = validGenerations[genMethod];
     if (choosenGen) {
         console.log("Generating Array with ", genMethod);
-        CanvasRender.setArray(choosenGen());
+        CANVAS_RENDER.setArray(choosenGen());
     }
 }
 
 function onPageCreate() {
-    CanvasRender.setCanvas(document.getElementById("sortingCanvas"));
+    
+
+    CANVAS_RENDER.setCanvas(document.getElementById("sortingCanvas"));
 
     generateArray();
 
@@ -74,9 +79,9 @@ function onPageCreate() {
 
 function renderPage() {
     generatePage();
-    CanvasRender.setOffset(offset);
-    CanvasRender.setBarWidth(barWidth);
-    CanvasRender.populateCanvas();
+    CANVAS_RENDER.setOffset(offset);
+    CANVAS_RENDER.setBarWidth(barWidth);
+    CANVAS_RENDER.populateCanvas();
 }
 
 function changeArraySize() {

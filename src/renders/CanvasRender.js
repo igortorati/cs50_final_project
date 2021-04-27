@@ -1,36 +1,40 @@
 class CanvasRender {
-    static array;
-    static canvas;
-    static context;
-    static leftOffset;
-    static barWidth = MINIMUM_BAR_SIZE;
+    
 
-    static setCanvas (canvas) {
+    constructor() {
+        this.array;
+        this.canvas;
+        this.context;
+        this.leftOffset;
+        this.barWidth = MINIMUM_BAR_SIZE;
+    }
+
+    setCanvas (canvas) {
         this.canvas = canvas;
         this.setContext(canvas.getContext("2d"));
     }
 
-    static setContext(context) {
+    setContext(context) {
         this.context = context;
     }
 
-    static setArray(array) {
+    setArray(array) {
         this.array = array;
     }
 
-    static getArray() {
+    getArray() {
         return this.array;
     }
 
-    static setOffset(offset) {
+    setOffset(offset) {
         this.leftOffset = offset;
     }
 
-    static setBarWidth(barWidth) {
+    setBarWidth(barWidth) {
         this.barWidth = (barWidth < MINIMUM_BAR_SIZE) ? MINIMUM_BAR_SIZE : barWidth;
     }
 
-    static populateCanvas() {
+    populateCanvas() {
         this.clear();
         //console.log("Populating");
         var i;
@@ -44,7 +48,7 @@ class CanvasRender {
         
     }
 
-    static update(event, data) {
+    update(event, data) {
         if (this.array) {
             const events = {
                 compare(data) {
@@ -61,11 +65,11 @@ class CanvasRender {
         }
     }
 
-    static clear() {
+    clear() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
-    static drawBar(drawFrom, height, color) {
+    drawBar(drawFrom, height, color) {
         //console.log(position, " ", height)
 
         this.context.beginPath();
