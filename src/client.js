@@ -108,6 +108,7 @@ function renderPage() {
 }
 
 function changeArray() {
+    abort();
     generateArray();
     renderPage();
 }
