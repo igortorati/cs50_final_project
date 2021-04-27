@@ -12,6 +12,7 @@ class Observable {
     }
 
     notifyAll(event, data) {
-        this.subscribers.forEach(subscriber => subscriber(event, data));
+        //console.log("Notifying all: ", event)
+        this.subscribers.forEach(subscriber => subscriber.update(event, data));
     }
 }

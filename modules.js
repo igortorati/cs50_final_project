@@ -1,6 +1,0 @@
-"./src/client"
-"./src/renders/PageRender"
-"./src/renders/CanvasRender"
-"./src/utils/Observable"
-"./src/algorithms/sortAlgorithm"
-"./src/algorithms/arrayGeneration"

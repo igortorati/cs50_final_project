@@ -9,7 +9,7 @@
         
         <script src="./src/renders/PageRender.js"></script>
     </head>
-    <body onload="generatePage()" onresize="generatePage()">
+    <body onload="onPageCreate()" onresize="renderPage()">
         <div>
             <nav class="navbar navbar-expand-sm navbar-light bg-light border">
                 <a class="navbar-brand" href="/cs50_final_project/"><span class="blue">Sorting Visualizer</span></a>
@@ -22,7 +22,7 @@
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="sortingAlgorithm">Sorting Algorithm: </label>
                                 <select name="sortingAlgorithm" id="sortingAlgorithm">
-                                    <option value="">-------</option>
+                                    <option value="BubbleSort">-------</option>
                                 </select>
                             </div>
                         </li>
@@ -30,20 +30,20 @@
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="generatingAlgorithm">Value Generation: </label>
                                 <select name="generatingAlgorithm" id="generatingAlgorithm">
-                                    <option value="">-------</option>
+                                    <option value="RandomGeneration">-------</option>
                                 </select>
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="mr-2 mt-2 ml-2">
                                 <label for="arraySize" class="form-label">Array Size: </label>
-                                <input type="range" class="form-range" min=4 max=250 value=100 id="arraySize" onchange="generatePage()">
+                                <input type="range" class="form-range" min=4 max=250 value=100 id="arraySize" onchange="changeArraySize()">
                             </div>
                         </li>
                         <li class="nav-item">
                             <div class="mr-2 ml-2">
-                                <button class="btn btn-primary" onclick="startSorting()">Sort</button>
-                                <button class="btn btn-primary" onclick="abortSorting()">Abort</button>
+                                <button class="btn btn-primary" onclick="start()" id="start">Sort</button>
+                                <button class="btn btn-primary" onclick="abort()" id="stop" disabled="true">Abort</button>
                             </div>
                         </li>
                     </ul>                
@@ -55,8 +55,11 @@
         </div>
 
         <script src="./src/utils/Observable.js"></script>
-        <script src="./src/algorithms/sortAlgorithm/BubbleSort.js"></script>
-        
+        <script src="./src/algorithms/sortAlgorithms/BubbleSort.js"></script>
+
+        <script src="./src/algorithms/arrayGeneration/RandomGeneration.js"></script>
+
         <script src="./src/renders/CanvasRender.js"></script>
+        <script src="./src/client.js"></script>
     </body>
 </html>

@@ -1,14 +1,15 @@
 const MINIMUM_BAR_SIZE = 2;
 const MINIMUM_BAR_MARGIN = 2;
-const HEIGHT_SCALE = 2;
+var HEIGHT_SCALE = 1;
 const HEIGHT_INCREMENT = 10; // offset in pixels from the botton of the canvas
 const CANVAS_WINDOW_WIDTH = 0.9; // canvas width, in % of window size
+const MAX_ARRAY_SIZE = 250;
 
 function calculateCanvasDimensions(windowWidth, arraySize) {
     const minimumWidth = arraySize * (MINIMUM_BAR_MARGIN + MINIMUM_BAR_SIZE);
     
     const navbarSize = parseInt(document.querySelector("nav").offsetHeight) + 10;
-    const minimumHeight = arraySize * HEIGHT_SCALE + HEIGHT_INCREMENT;
+    const minimumHeight = arraySize * 2 + HEIGHT_INCREMENT;
 
     const calculatedHeight = window.innerHeight - navbarSize;
 
@@ -29,6 +30,10 @@ function calculateLeftOffset(windowWidth, arraySize, barWidth) {
     return Math.floor((windowWidth - (arraySize * barWidth) - (arraySize * MINIMUM_BAR_MARGIN)) / 2);
 }
 
+function calculateHeightScale(arraySize, height) {
+    return Math.floor((height - HEIGHT_INCREMENT) / arraySize) ;
+}
+
 function setCanvasDimension(width, height) {
     const canvas = document.getElementById("sortingCanvas");
     canvas.width = width;
@@ -36,21 +41,31 @@ function setCanvasDimension(width, height) {
 }
 
 function setBarWidth(barWidth) {
-    document.documentElement.style.setProperty("--barWidth", (barWidth < MINIMUM_BAR_SIZE)? MINIMUM_BAR_SIZE : barWidth);
+    const root = document.querySelector(':root');
+    root.style.setProperty("--barWidth", (barWidth < MINIMUM_BAR_SIZE)? MINIMUM_BAR_SIZE : barWidth);
 }
 
 function generatePage() {
-    const windowWidth = window.innerWidth * CANVAS_WINDOW_WIDTH;
-    const arraySize = parseInt(document.getElementById("arraySize").value);
-
-    const { width, height } = calculateCanvasDimensions(windowWidth, arraySize);
-    //console.log("CW: ", width, " CH: ", height);
-    setCanvasDimension(width, height);
-
-    barWidth = calculateBarWidth(windowWidth, arraySize);
-    setBarWidth(barWidth);
-    //console.log("barWidth:", barWidth);
-
-    offset = calculateLeftOffset(windowWidth, arraySize, barWidth);
-    //console.log("O:", offset)
+    if (!RUNNING){
+        const windowWidth = window.innerWidth * CANVAS_WINDOW_WIDTH;
+        var arraySize = parseInt(document.getElementById("arraySize").value);
+        arraySize = (arraySize <= MAX_ARRAY_SIZE)? arraySize : MAX_ARRAY_SIZE;
+        
+    
+        const { width, height } = calculateCanvasDimensions(windowWidth, arraySize);
+        //console.log("CW: ", width, " CH: ", height);
+        setCanvasDimension(width, height);
+    
+        HEIGHT_SCALE = calculateHeightScale(arraySize, height);
+        console.log("ArSize: ", arraySize, "HS: ", HEIGHT_SCALE)
+    
+    
+        barWidth = calculateBarWidth(windowWidth, arraySize);
+        setBarWidth(barWidth);
+        //console.log("barWidth:", barWidth);
+    
+        offset = calculateLeftOffset(windowWidth, arraySize, barWidth);
+        //console.log("O:", offset)
+    }
+    
 }
