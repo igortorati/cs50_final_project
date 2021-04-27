@@ -1,7 +1,7 @@
 var RUNNING = false;
 var ARRAY = [];
 var ORDERED = []
-var SLEEP_TIME = 200;
+var SLEEP_TIME = 100;
 const SWAP_SLEEP_MODFIER = 1;
 const CANVAS_RENDER = new CanvasRender();
 const DEFAULT_BAR_COLOR = "#4d4d4d";
@@ -133,4 +133,13 @@ async function changeArray() {
     generateArray();
     console.log(ARRAY);
     renderPage();
+}
+
+async function changeSpeed() {
+    const value = parseInt(document.getElementById("speed").value);
+    if(document.getElementById("slowMode").checked) {
+        SLEEP_TIME = 1000 - value * 2;
+    } else {
+        SLEEP_TIME = 200 - value;
+    }
 }
